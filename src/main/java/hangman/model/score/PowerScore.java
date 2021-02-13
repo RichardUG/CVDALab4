@@ -20,8 +20,12 @@ public class PowerScore implements GameScore {
 	 */
 	@Override
 	public int calculateScore(int correctCount, int incorrectCount) throws IllegalArgumentException {
-
-		return 0;
+		if (correctCount < 0 || incorrectCount < 0) throw new IllegalArgumentException();
+		int potencia = 0;
+		for (int i=1; i<= correctCount; i++)
+			potencia += (int)Math.pow(5, i);
+		potencia -= 8*incorrectCount;
+		return (potencia <= 0) ? 0 : Math.min(potencia, 500);
 	}
 
 }

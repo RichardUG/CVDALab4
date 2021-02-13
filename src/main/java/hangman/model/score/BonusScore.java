@@ -19,8 +19,8 @@ public class BonusScore implements GameScore {
 	 */
 	@Override
 	public int calculateScore(int correctCount, int incorrectCount) throws IllegalArgumentException {
-
-		return 0;
+		if (correctCount < 0 || incorrectCount < 0) throw new IllegalArgumentException();
+		return Math.max(10*correctCount - 5*incorrectCount, 0);
 	}
 
 }

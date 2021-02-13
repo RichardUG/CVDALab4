@@ -13,6 +13,9 @@ public class BonusScore implements GameScore {
 	
 	/**
 	 * {@inheritDoc}
+	 * @Pre 0
+	 * @Pos (correctCount * 10) - (incorrectCount * 5)
+	 * @Pos return>0
 	 */
 	@Override
 	public int calculateScore(int correctCount, int incorrectCount) throws IllegalArgumentException {

@@ -14,6 +14,10 @@ public class OriginalScore implements GameScore {
 	
 	/**
 	 * {@inheritDoc}
+	 * @pre 100
+	 * @pos 100 - incorrectCount * 10
+	 * @pos return>0
+	 *
 	 */
 	@Override
 	public int calculateScore(int correctCount, int incorrectCount) throws IllegalArgumentException {

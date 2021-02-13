@@ -6,18 +6,18 @@ equivalencia para las tres variantes de GameScore, e identifique condiciones de 
 >>
 >> **Clases de eqivalencia**
 >>>
->>> ![](tabla1:PNG)
+>>> ![](tabla1.PNG)
 >>>
->>> ![](tabla2:PNG)
+>>> ![](tabla2.PNG)
 >>>
->>> ![](tabla3:PNG)
+>>> ![](tabla3.PNG)
 >>>
 >>
 >> **Limite de frontera**
 >>>
->>> ![](tabla4:PNG)
+>>> ![](tabla4.PNG)
 >>>
->>> ![](tabla5:PNG)
+>>> ![](tabla5.PNG)
 >>>
->>> ![](tabla6:PNG)
+>>> ![](tabla6.PNG)
 >>>

@@ -1,10 +1,13 @@
 package hangman;
 
+import com.google.inject.Guice;
 import com.google.inject.Inject;
 import hangman.controller.*;
 import hangman.model.*;
 import hangman.model.dictionary.HangmanDictionary;
+import hangman.model.score.GameScore;
 import hangman.setup.factoryMethod.HangmanFactoryMethod;
+import hangman.setup.guice.HangmanFactoryServices;
 import hangman.view.*;
 
 import java.awt.*;
@@ -61,7 +64,7 @@ public class GUI {
     //method: setup
     //purpose: Create the various panels (game screens) for our game
     // and attach them to the main frame.
-    private void setup(){
+    private void setup() throws ClassNotFoundException {
         mainFrameController = new MainFrameController(
                 new MainFrameModel(PROJECT_NAME,600,400,null,EXIT_ON_CLOSE),
                 new MainFrame()
@@ -79,7 +82,7 @@ public class GUI {
                 mainFrameController
         );
 
-        GameModel gameModel = new GameModel(dictionary);
+        GameModel gameModel = new GameModel(dictionary, (GameScore) Guice.createInjector(new HangmanFactoryServices("French", "FrenchDictionaryDataSource", "BonusScore", "HangmanColoridoPanel")).getInstance(GameScore.class));
         gameController = new GameController(
                 new GamePanel(gameModel.getCharacterSet(), hangmanPanel, language),
                 gameModel,
@@ -119,7 +122,11 @@ public class GUI {
     //then set the whole thing visible
     private void setupAndStart(){
         javax.swing.SwingUtilities.invokeLater(() -> {
-            setup();
+            try {
+                setup();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             mainFrameController.changeVisibleCard(SPLASH_KEY);
             mainFrameController.getFrame().setVisible(true);
         });

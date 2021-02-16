@@ -48,15 +48,15 @@ public class SwingProject {
         return new GUI(new HangmanDefaultFactoryMethod());
     }
 
-    public static GUI createGUIUsingGuice() {
-        Injector injector = Guice.createInjector(new HangmanFactoryServices());
+    public static GUI createGUIUsingGuice() throws ClassNotFoundException {
+        Injector injector = Guice.createInjector(new HangmanFactoryServices("French", "FrenchDictionaryDataSource", "BonusScore", "HangmanColoridoPanel"));
         return injector.getInstance(GUI.class);
     }
 
     //method: main
     //purpose: the entry-point to our application
-    public static void main(String[] args) {
-        createGUIUsingFactoryMethod().play();
+    public static void main(String[] args) throws ClassNotFoundException {
+        createGUIUsingGuice().play();
     }
 
 }

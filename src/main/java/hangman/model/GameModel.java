@@ -12,7 +12,11 @@
 ****************************************************************/ 
 package hangman.model;
 
+import com.google.inject.Inject;
 import hangman.model.dictionary.HangmanDictionary;
+import hangman.model.score.GameScore;
+import hangman.model.score.OriginalScore;
+import hangman.model.score.PowerScore;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -31,17 +35,15 @@ public class GameModel {
     private Scanner scan;
     private String randomWord;
     private char[] randomWordCharArray;
-    
-    
+
+    @Inject
+    private GameScore gameScoreCalculator;
    
-    public GameModel(HangmanDictionary dictionary){
+    public GameModel(HangmanDictionary dictionary, GameScore instance){
         //this.dictionary = new EnglishDictionaryDataSource();
         this.dictionary=dictionary;
-        randomWord = selectRandomWord();
-        randomWordCharArray = randomWord.toCharArray();
-        incorrectCount = 0;
-        correctCount = 0;
-        gameScore = 100;
+        gameScoreCalculator = instance;
+        reset();
         
     }
     
@@ -52,7 +54,7 @@ public class GameModel {
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        gameScore = 100;
+        setScore(gameScoreCalculator.calculateScore(correctCount, incorrectCount));
     }
 
     //setDateTime
@@ -74,10 +76,10 @@ public class GameModel {
         }
         if(positions.size() == 0){
             incorrectCount++;
-            gameScore -= 10;
         } else {
             correctCount += positions.size();
         }
+        setScore(gameScoreCalculator.calculateScore(correctCount, incorrectCount));
         return positions;
         
     }
@@ -141,5 +143,8 @@ public class GameModel {
 
     public List<Character> getCharacterSet() {
         return new ArrayList<>(dictionary.getCharacterSet());
+    }
+    public void setGameScoreCalculator(GameScore gs) {
+        gameScoreCalculator = gs;
     }
 }

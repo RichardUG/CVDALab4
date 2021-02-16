@@ -1,4 +1,6 @@
 ### LABORATORIO 4 - HANGMAN - 2021-1
+### Ana Maria Salazar Bohorquez
+### Richard Santiago Urrea Garcia
 ## Parte I
 > ## Teniendo en cuenta dichas especificaciones, en la clase donde se implementarán
  las pruebas (GameScoreTest), en los comentarios iniciales, especifique las clases de 
